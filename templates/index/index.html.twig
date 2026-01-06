@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Neato!{% endblock %}
+
+{% block body %}
+
+{% include 'index/header.html.twig' %}
+
+<div class="wrapper">
+
+    <ul>
+    {% for category in categories %}
+
+        <li><a href="{{ path('app_category', {slug: category.slug}) }}"><b>{{ category.title }}</b></a> 
+        {% if category.children is not empty %}
+        - -
+            <i>
+            {% for child in category.children %}
+                <a href="{{ path('app_category', {slug: child.slug}) }}">{{ child.title }}</a>, 
+            {% endfor %}
+                <a href="{{ path('app_category', {slug: category.slug}) }}">...</a>
+            </i>
+
+        {% endif %}
+        </li>
+
+    {% endfor %}
+    </ul>
+
+</div>
+{% endblock %}
+

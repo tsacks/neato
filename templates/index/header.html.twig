@@ -1,0 +1,24 @@
+<style>
+    .wrapper { margin: 1em auto; max-width: 600px; width: 95%;}
+    .center { text-align: center; }
+</style>
+
+<div class="wrapper">
+
+    <div class="center">
+        <img src="{{ asset('images/banner-image-map.gif') }}" alt="Neato!" usemap="#workmap">
+
+        <map name="workmap">
+            <area shape="rect" coords="200,0,400,60" alt="Neato!" href="{{ path('app_index') }}">
+            <area shape="rect" coords="10,0,70,60" alt="New" href="{{ path('app_new') }}">
+            <area shape="rect" coords="70,0,130,60" alt="Cool" href="{{ path('app_cool') }}">
+            <area shape="rect" coords="130,0,190,60" alt="Random" href="{{ path('app_random') }}">
+            <area shape="rect" coords="410,0,470,60" alt="Head Lines" href="{{ path('app_headlines') }}">
+            <area shape="rect" coords="470,0,530,60" alt="Neato Info" href="{{ path('app_info') }}">
+            <area shape="rect" coords="530,0,590,60" alt="Add URL" href="{{ path('app_add') }}">
+        </map>
+    </div>
+    
+    <hr>
+
+</div>
