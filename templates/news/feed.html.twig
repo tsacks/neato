@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Neato!{% endblock %}
+
+{% block body %}
+
+<div class="wrapper">
+
+    <h2><a href="{{ path('app_news') }}">News</a> &gt; {{ title }}</h2>
+
+    <hr>
+
+</div>
+
+{% if items is not empty %}
+<div class="wrapper">
+    <table>
+
+    {% for item in items %}
+    <tr>
+        <td>
+			<img src="{{ path('app_proxy_image') ~ '?url=' ~ item.get_item_tags('http://search.yahoo.com/mrss/', 'thumbnail').1.attribs[''].url|url_encode }}">
+        </td>
+        <td>
+            <b><a href="{{ item.get_permalink() }}">{{ item.get_title() }}</a></b>
+            <div class="datetime">{{ item.get_date() }}</div>
+            <p>{{ item.get_description() }}</p>
+        </td>
+    </tr>
+    {% endfor %}
+    
+    </table>
+</div>
+{% endif %}
+
+{% endblock %}
+

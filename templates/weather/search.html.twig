@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block meta %}<meta name="turbo-cache-control" content="no-cache">{% endblock %}
+
+{% block title %}Neato!{% endblock %}
+
+{% block body %}
+<style>
+    .dow, .image, .desc, .high, .low { width: 85px; }
+    .temp {
+        font-size: 48px;
+    }
+    table {
+        width: 100%;
+    }
+    tr.header > th {
+        border-bottom: 2px solid black;
+    }
+    tr.result > td {
+        border-bottom: 1px solid grey;
+    }
+    table.debug {
+        border: 1px solid black;
+    }
+    table.debug > tr > td {
+        border: 1px solid black;
+    }
+</style>
+
+<div class="wrapper">
+    <h3>Weather</h3>
+    <hr>
+</div>
+
+<div class="wrapper">
+    {{ form(form) }}
+    <hr>
+</div>
+
+{% if results %}
+<div class="wrapper">
+    <table>
+        <tr class="header">
+            <th>Country</th>
+            <th>City</th>
+            <th>Admin</th>
+            <th></th>
+        </tr>
+        {% for result in results.results %}
+            <tr class="result">
+                <td>{{ result.country }}</td>
+                <td>{{ result.name }}</td>
+                <td>
+                    <ul>
+                        {% if result.admin1 is defined %}<li>{{ result.admin1 }}</li>{% endif %}
+                        {% if result.admin2 is defined %}<li>{{ result.admin2 }}</li>{% endif %}
+                        {% if result.admin3 is defined %}<li>{{ result.admin3 }}</li>{% endif %}
+                        {% if result.admin4 is defined %}<li>{{ result.admin4 }}</li>{% endif %}
+                    </ul>
+                </td>
+                <td>
+                    <a href="{{ path('app_weather_set',{'name':result.name,'lat':result.latitude|number_format(2),'lon':result.longitude|number_format(2)}) }}">Set</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <hr>
+</div>
+{% endif %}
+
+
+{% endblock %}

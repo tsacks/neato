@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+    <style>
+        #form {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+    <div class="wrapper">
+        <form method="post">
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            {% if app.user %}
+                <div class="mb-3">
+                    You are logged in as {{ app.user.userIdentifier }}, <a href="{{ logout_path() }}">Logout</a>
+                </div>
+            {% endif %}
+
+            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+
+            <table id="form">
+                <tbody>
+                    <tr>
+                        <td><label for="username" class="required">Username</label></td>
+                        <td><input type="text" value="{{ last_username }}" name="_username" id="username" required="required" autocomplete="username" autofocus></td>
+                    </tr>
+                    <tr>
+                        <td><label for="password" class="required">Password</label></td>
+                        <td><input type="password" name="_password" id="password" autocomplete="current-password" required="required"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="_remember_me">Remember me</label></td>
+                        <td><input type="checkbox" name="_remember_me" id="_remember_me"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" value="Login"></td>
+                    </tr>
+                    <tr style="display: none">
+                        <td colspan="2"><input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+
+        <hr>
+    </div>
+{% endblock %}

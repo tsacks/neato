@@ -1,0 +1,17 @@
+<style>
+    .wrapper { margin: 12px auto; max-width: 600px; width: 95%;}
+    .center { text-align: center; }
+</style>
+
+<div class="wrapper">
+
+    <div class="center">
+        {{ ""|date('Y') }} - Neato! - A project by <a href="">@GothPanda</a><br>
+        {% if( app.user ) %}
+            {{ app.user.username }}: <a href="{{ path('app_guide') }}">Guide Access</a> | <a href="{{ path('app_logout') }}">Logout</a>
+        {% else %}
+            <a href="{{ path('app_login') }}">Guide Login</a>
+        {% endif %}
+    </div>
+
+</div>

@@ -38,6 +38,9 @@ class Category
     #[ORM\ManyToMany(targetEntity: Link::class, mappedBy: 'categories')]
     private Collection $links;
 
+    #[ORM\Column(length: 60, nullable: true)]
+    private ?string $news_slug = null;
+
     public function __construct() {
         $this->children = new ArrayCollection();
         $this->links = new ArrayCollection();
@@ -100,7 +103,7 @@ class Category
         return $this;
     }
 
-    public function getParent(): Category
+    public function getParent(): ?Category
     {
         return $this->parent;
     }
@@ -147,6 +150,18 @@ class Category
         if ($this->links->removeElement($link)) {
             $link->removeCategory($this);
         }
+
+        return $this;
+    }
+
+    public function getNewsSlug(): ?string
+    {
+        return $this->news_slug;
+    }
+
+    public function setNewsSlug(?string $news_slug): static
+    {
+        $this->news_slug = $news_slug;
 
         return $this;
     }

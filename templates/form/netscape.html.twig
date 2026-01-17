@@ -1,0 +1,4 @@
+{# templates/form/netscape.html.twig #}
+{%- block button_widget -%}
+    <input type="{{ type|default('button') }}" value="{{- block('form_label_content') -}}" {{ block('button_attributes') }}>
+{%- endblock button_widget -%}

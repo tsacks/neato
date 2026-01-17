@@ -49,6 +49,9 @@ class Link
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $comment = null;
 
+    #[ORM\Column(options: ['default' => false])]
+    private ?bool $approved = false;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -187,6 +190,18 @@ class Link
     public function setComment(?string $comment): static
     {
         $this->comment = $comment;
+
+        return $this;
+    }
+
+    public function isApproved(): ?bool
+    {
+        return $this->approved;
+    }
+
+    public function setApproved(bool $approved): static
+    {
+        $this->approved = $approved;
 
         return $this;
     }

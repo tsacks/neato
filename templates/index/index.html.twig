@@ -4,14 +4,19 @@
 
 {% block body %}
 
-{% include 'index/header.html.twig' %}
-
 <div class="wrapper">
 
     <ul>
     {% for category in categories %}
 
         <li><a href="{{ path('app_category', {slug: category.slug}) }}"><b>{{ category.title }}</b></a> 
+        {% if category.newsSlug is not null %}
+            {%if category.newsSlug is empty %}
+                <a href="{{ path('app_news') }}"><b>[Xtra!]</b></a>
+            {% else %}
+                <a href="{{ path('app_news_feed', {slug: category.newsSlug}) }}"><b>[Xtra!]</b></a>
+            {% endif %}
+        {% endif %}
         {% if category.children is not empty %}
         - -
             <i>
@@ -20,12 +25,13 @@
             {% endfor %}
                 <a href="{{ path('app_category', {slug: category.slug}) }}">...</a>
             </i>
-
         {% endif %}
+        <p></p>
         </li>
 
     {% endfor %}
     </ul>
+    <hr>
 
 </div>
 {% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Neato!{% endblock %}
+
+{% block body %}
+<style>
+    .wrapper { margin: 1em auto; max-width: 600px; width: 95%;}
+    .center { text-align: center; }
+    table { width: 100%; }
+    .pull-right { text-align: right; }
+</style>
+
+<div class="wrapper">
+    <h2><a href="{{ path('app_guide') }}">Guide Access</a> &gt; All Links</h2>
+    <hr>
+
+    <table>
+        <tr>
+            <th>Link</th>
+            <th>Comment</th>
+            <th>Options</th>
+        </tr>
+    {% for link in links %}
+        <tr>
+            <td><a href="{{ link.URL }}">{{ link.title }}</a></td>
+            <td>{{ link.comment }}</td>
+            <td class="pull-right">
+                <a href="{{ path('app_guide_link', {id: link.id}) }}">Edit</a> | <a href="{{ path('app_guide_link_approve', {id: link.id}) }}">Approve</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+    <hr>
+</div>
+{% endblock %}
+

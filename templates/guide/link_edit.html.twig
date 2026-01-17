@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Neato!{% endblock %}
+
+{% block body %}
+<style>
+    label.required:after { content: "*"; color: red; }
+    label.label { display: inline-block; width: 100px; }
+    th { text-align: left; padding-top: 15px; }
+</style>
+
+<div class="wrapper">
+
+    <h2>Add a link to Neato!</h2>
+
+    {% form_theme form with [
+        'form_table_layout.html.twig',
+        'form/netscape.html.twig'
+    ] %}
+
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        <table>
+            <tbody>
+                <tr>
+                    <th colspan="2">Basic Info (Required)</th>
+                </tr>
+                {{ form_row(form.title) }}
+                {{ form_row(form.url) }}
+                {{ form_row(form.comment) }}
+                {{ form_row(form.categories) }}
+
+                <tr>
+                    <th colspan="2">Geographic Info (Optional)</th>
+                </tr>
+                {{ form_row(form.city) }}
+                {{ form_row(form.state) }}
+                {{ form_row(form.country) }}
+
+                <tr>
+                    <th colspan="2">Contact Info (Optional)</th>
+                </tr>
+                {{ form_row(form.name) }}
+                {{ form_row(form.email) }}
+                {{ form_row(form.contact) }}
+            
+                {{ form_rest(form) }}
+            </tbody>
+        </table>
+    {{ form_end(form) }}
+
+    <hr>
+
+</div>
+{% endblock %}
+

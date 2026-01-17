@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Neato!{% endblock %}
+
+{% block body %}
+<style>
+    table { width: 100%; }
+    .city { font-size: 24px; }
+    .desc { font-size: 18px; }
+    .temp { font-size: 48px; }
+    .foot { margin-top: 15px; }
+    .story { padding-left: 10px; }
+    .current_temp { text-align: left; }
+    .current_cond { text-align: center; }
+    .current_misc { text-align: right; }
+    .pull-right { margin-left: 10px; float: right; }
+</style>
+
+{% if forecast is null %}
+<div class="wrapper">
+    <p>Interested in seeing personalized weather? <a href="{{ path('app_weather_search') }}">Search for your location!</a></p>
+    <hr>
+</div>
+{% elseif not forecast %}
+<div class="wrapper">
+    <p>Weather is unavailable at this time.</p>
+    <hr>
+</div>
+{% else %}
+<div class="wrapper">
+    <table>
+        <tr>
+            <td class="current_temp" width="35%">
+                <div class="city">{{ location.name }}</div>
+                <div class="temp">{{ forecast.current.temperature_2m|number_format }}{{ forecast.current_units.temperature_2m }}</div>
+            </td>
+            <td class="current_cond" width="30%">
+                <img src="{{ asset( 'images/weather/' ~ wmocodes[forecast.current.weather_code].image ~ '.gif' )}}">
+                <div class="desc">{{ wmocodes[forecast.current.weather_code].description }}</div>
+            </td>
+            <td class="current_misc" width="35%">
+                Wind: {{ forecast.current.wind_direction_10m_cardinal }} {{ forecast.current.wind_speed_10m|number_format }} {{ forecast.current_units.wind_speed_10m }}<br>
+                Wind Gusts:  {{ forecast.current.wind_gusts_10m|number_format }} {{ forecast.current_units.wind_gusts_10m }}<br>
+                Chance of Precipitation: {{ forecast.current.precipitation_probability }}{{ forecast.current_units.precipitation_probability }}<br>
+                Relative Humidity: {{ forecast.current.relative_humidity_2m }}{{ forecast.current_units.relative_humidity_2m }}<br>
+            </td>
+        </tr>
+    </table>
+    <div class="pull-right"><a href="{{ path('app_weather') }}">Full Forecast &gt;</a></div>
+    <hr class="foot">
+</div>
+{% endif %}
+
+{% if feeds is not empty %}
+<div class="wrapper">
+    {% for feed in feeds %}
+        <h2>{{ feed.title }}</h2>
+        <table>
+        {% for i in 0..2 %}
+            {% if feed.items[i] is defined %}
+                {% set item = feed.items[i] %}
+                <tr>
+                    <td>
+                        <img src="{{ path('app_proxy_image') ~ '?url=' ~ item.get_item_tags('http://search.yahoo.com/mrss/', 'thumbnail').1.attribs[''].url|url_encode }}">
+                    </td>
+                    <td class="story">
+                        <b><a href="{{ item.get_permalink() }}">{{ item.get_title() }}</a></b>
+                        <div class="datetime">{{ item.get_date() }}</div>
+                        <p>{{ item.get_description() }}</p>
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+        </table>
+        <div class="pull-right"><a href="{{ path('app_news_feed', {slug: feed.slug}) }}">Read more in {{feed.title}} &gt;</a></div>
+        <hr class="foot">
+    {% endfor %}
+    
+</div>
+{% endif %}
+
+{% endblock %}
+

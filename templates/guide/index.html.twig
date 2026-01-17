@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Neato!{% endblock %}
+
+{% block body %}
+<style>
+    .wrapper { margin: 1em auto; max-width: 600px; width: 95%;}
+    .center { text-align: center; }
+    .pull-right { margin-left: 10px; float: right; }
+</style>
+
+<div class="wrapper">
+    <h2>Guide Access</h2>
+    <hr>
+
+    <h3>Pending Links</h3>
+        <div>
+            There are {{ links|length }} links pending approval
+            <span class="pull-right"><a href="{{ path('app_guide_pending') }}">Approve Links &gt;</a></span>
+        </div>
+        <hr class="foot">
+    <hr>
+
+    <h3>All Links</h3>
+        <div>
+            <span class="pull-right"><a href="{{ path('app_guide_links') }}">Browse Links &gt;</a></span>
+        </div>
+        <hr class="foot">
+    <hr>
+</div>
+{% endblock %}
+

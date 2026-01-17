@@ -4,18 +4,12 @@
 
 {% block body %}
 
-{% include 'category/header.html.twig' %}
-
 <div class="wrapper">
-
-    <h3>{{ category.title }}</h3>
-
+    <h2>{% if category.parent is not null %}<a href="{{ path('app_category', {slug: category.parent.slug}) }}">{{ category.parent.title}}</a> &gt; {% endif %}{{ category.title }}</h2>
     <hr>
-
 </div>
 
 {% if category.children is not empty %}
-
 <div class="wrapper">
 
     <ul>
@@ -26,17 +20,24 @@
     {% endfor %}
     </ul>
 
+    {% if category.children is not empty and category.links is not empty %}
+    <hr>
+    {% endif %}
+
 </div>
 {% endif %}
 
-{% if category.links is not empty %}
 
+
+{% if category.links is not empty %}
 <div class="wrapper">
 
     <ul>
     {% for link in category.links %}
 
-    <li><a href="{{ link.url }}">{{ link.title }}</a> - {{ link.comment }}</li>
+    {% if link.approved %}
+        <li><a href="{{ link.url }}">{{ link.title }}</a> - {{ link.comment }}</li>
+    {% endif %}
 
     {% endfor %}
 

@@ -14,7 +14,6 @@ final class CategoryController extends AbstractController
     public function index(EntityManagerInterface $entityManager, ?Category $category): Response
     {
         return $this->render('category/index.html.twig', [
-            'controller_name' => 'IndexController',
             'category' => $category
         ]);
     }
