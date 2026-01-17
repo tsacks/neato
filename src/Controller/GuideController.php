@@ -36,9 +36,11 @@ final class GuideController extends AbstractController
         $pendingLinks = $repository->findBy(
             ['approved' => false],
         );
+        $allLinks = $repository->findAll();
 
         return $this->render('guide/index.html.twig', [
-            'links' => $pendingLinks,
+            'pendingLinks' => $pendingLinks,
+            'allLinks' => $allLinks,
         ]);
     }
 

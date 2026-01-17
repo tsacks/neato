@@ -25,7 +25,7 @@
             <td><a href="{{ link.URL }}">{{ link.title }}</a></td>
             <td>{{ link.comment }}</td>
             <td class="pull-right">
-                <a href="{{ path('app_guide_link', {id: link.id}) }}">Edit</a> | <a href="{{ path('app_guide_link_approve', {id: link.id}) }}">Approve</a>
+                <a href="{{ path('app_guide_link', {id: link.id}) }}">Edit</a>
             </td>
         </tr>
     {% endfor %}

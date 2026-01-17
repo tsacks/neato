@@ -7,6 +7,7 @@
     .wrapper { margin: 1em auto; max-width: 600px; width: 95%;}
     .center { text-align: center; }
     .pull-right { margin-left: 10px; float: right; }
+    .foot { margin-top: 15px; }
 </style>
 
 <div class="wrapper">
@@ -14,19 +15,18 @@
     <hr>
 
     <h3>Pending Links</h3>
-        <div>
-            There are {{ links|length }} links pending approval
-            <span class="pull-right"><a href="{{ path('app_guide_pending') }}">Approve Links &gt;</a></span>
-        </div>
-        <hr class="foot">
-    <hr>
+    <div>
+        There are {{ pendingLinks|length }} links pending approval
+        <span class="pull-right"><a href="{{ path('app_guide_pending') }}">Approve Links &gt;</a></span>
+    </div>
+    <hr class="foot">
 
     <h3>All Links</h3>
-        <div>
-            <span class="pull-right"><a href="{{ path('app_guide_links') }}">Browse Links &gt;</a></span>
-        </div>
-        <hr class="foot">
-    <hr>
+    <div>
+        There are {{ allLinks|length }} links in the directory
+        <span class="pull-right"><a href="{{ path('app_guide_links') }}">Browse Links &gt;</a></span>
+    </div>
+    <hr class="foot">
 </div>
 {% endblock %}
 
