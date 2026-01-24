@@ -143,7 +143,7 @@ final class WeatherController extends AbstractController
             'name' => $name,
             'lat' => $lat,
             'lon' => $lon,
-        ]));
+        ]))->withExpires(new \DateTime('+1 week'));
 
         $response = new RedirectResponse($this->generateUrl('app_weather'));
         $response->headers->setCookie($cookie);
