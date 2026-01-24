@@ -1,0 +1,42 @@
+<?php
+
+namespace App\Entity;
+
+use DateTime;
+use DateTimeImmutable;
+use DateTimeInterface;
+use Doctrine\ORM\Mapping as ORM;
+
+trait Timestamps
+{
+    #[ORM\Column(name:'created_at',type:'datetime_immutable')]
+    private $createdAt;
+
+    #[ORM\Column(name:'updated_at',type:'datetime',nullable:true)]
+    private $updatedAt;
+
+    public function getCreatedAt(): ?DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    #[ORM\PrePersist]
+    public function setCreatedAt(?DateTimeInterface $timestamp): self
+    {
+        $this->createdAt = new DateTimeImmutable();
+        $this->setUpdatedAt();
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+    
+    #[ORM\PreUpdate]
+    public function setUpdatedAt(?DateTimeInterface $timestamp): self
+    {
+        $this->updatedAt = new DateTime();
+        return $this;
+    }
+}

@@ -36,7 +36,9 @@
     {% for link in category.links %}
 
     {% if link.approved %}
-        <li><a href="{{ link.url }}">{{ link.title }}</a> - {{ link.comment }}</li>
+        <li><a href="{{ link.url }}">{{ link.title }}</a>
+        {% if link.createdAt|date() >= "-1 month"|date() %}<img src="{{ asset( 'images/new.gif' )}}">{% endif %}
+         - {{ link.comment }}</li>
     {% endif %}
 
     {% endfor %}

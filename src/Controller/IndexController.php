@@ -29,25 +29,24 @@ final class IndexController extends AbstractController
         );
 
         return $this->render('index/index.html.twig', [
-            'controller_name' => 'IndexController',
             'categories' => $categories
         ]);
     }
 
     #[Route('/new', name: 'app_new')]
-    public function new(): Response
+    public function new(EntityManagerInterface $entityManager): Response
     {
+        $newLinks = $entityManager->getRepository(Link::class)->getAllNew();
+
         return $this->render('index/new.html.twig', [
-            'controller_name' => 'IndexController',
+            'links' => $newLinks,
         ]);
     }
 
     #[Route('/cool', name: 'app_cool')]
     public function cool(): Response
     {
-        return $this->render('index/cool.html.twig', [
-            'controller_name' => 'IndexController',
-        ]);
+        return $this->redirectToRoute('app_category', ['slug' => 'entertainment/cool-links']);
     }
 
     #[Route('/random', name: 'app_random')]
@@ -61,8 +60,6 @@ final class IndexController extends AbstractController
     #[Route('/info', name: 'app_info')]
     public function info(): Response
     {
-        return $this->render('index/info.html.twig', [
-            'controller_name' => 'IndexController',
-        ]);
+        return $this->render('index/info.html.twig');
     }
 }

@@ -3,13 +3,28 @@
 {% block title %}Neato!{% endblock %}
 
 {% block body %}
-<style>
-    .wrapper { margin: 1em auto; max-width: 600px; width: 95%;}
-    .center { text-align: center; }
-</style>
 
 <div class="wrapper">
+    <h2>New Links</h2>
+    <hr>
+</div>
+
+{% if links is not empty %}
+<div class="wrapper">
+
+    <ul>
+    {% for link in links %}
+
+    {% if link.approved %}
+        <li><a href="{{ link.url }}">{{ link.title }}</a>
+        {% if link.createdAt|date() >= "-1 month"|date() %}<img src="{{ asset( 'images/new.gif' )}}">{% endif %}
+         - {{ link.comment }}</li>
+    {% endif %}
+
+    {% endfor %}
 
 </div>
+{% endif %}
+
 {% endblock %}
 

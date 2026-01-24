@@ -9,8 +9,11 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: LinkRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Link
 {
+    use Timestamps;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

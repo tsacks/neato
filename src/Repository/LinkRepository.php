@@ -26,6 +26,18 @@ class LinkRepository extends ServiceEntityRepository
         ;
     }
 
+    public function getAllNew()
+    {
+        $queryBuilder = $this->createQueryBuilder('l')
+            ->where('l.createdAt > :monthAgo')
+            ->setParameter('monthAgo', date("y-m-d",strtotime("-1 month")))
+            ->orderBy('l.createdAt', 'DESC');
+
+        $query = $queryBuilder->getQuery();
+
+        return $query->execute();
+    }
+
 //    /**
 //     * @return Link[] Returns an array of Link objects
 //     */

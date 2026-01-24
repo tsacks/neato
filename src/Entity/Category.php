@@ -10,6 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
 {
+    use Timestamps;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
