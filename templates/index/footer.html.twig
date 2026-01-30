@@ -1,7 +1,7 @@
 <div class="wrapper">
 
     <div class="center">
-        {{ ""|date('Y') }} - Neato! - A project by <a href="">@GothPanda</a><br>
+        {{ ""|date('Y') }} - Neato! - A project by <a href="">GothPanda</a><br>
         {% if( app.user ) %}
             {{ app.user.username }}: <a href="{{ path('app_guide') }}">Guide Access</a> | <a href="{{ path('app_logout') }}">Logout</a>
         {% else %}
