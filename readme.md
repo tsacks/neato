@@ -1,6 +1,6 @@
 # Neato!
 
-Neato! is a web directory, originally created for [CHGMN](https://cghmn.org),
+Neato! is a web directory, originally created for [CGHMN](https://cghmn.org),
 that allows people to share and discover services and resources on the network.
 
 ## Requirements
