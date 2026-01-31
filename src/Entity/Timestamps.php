@@ -21,7 +21,7 @@ trait Timestamps
     }
 
     #[ORM\PrePersist]
-    public function setCreatedAt(?DateTimeInterface $timestamp): self
+    public function setCreatedAt(): self
     {
         $this->createdAt = new DateTimeImmutable();
         $this->setUpdatedAt();
@@ -34,7 +34,7 @@ trait Timestamps
     }
     
     #[ORM\PreUpdate]
-    public function setUpdatedAt(?DateTimeInterface $timestamp): self
+    public function setUpdatedAt(): self
     {
         $this->updatedAt = new DateTime();
         return $this;

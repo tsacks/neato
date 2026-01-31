@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Category
 {
     use Timestamps;
@@ -58,7 +59,7 @@ class Category
         return $this->title;
     }
 
-    public function setTitle(string $Title): static
+    public function setTitle(string $title): static
     {
         $this->title = $title;
 
@@ -110,7 +111,7 @@ class Category
         return $this->parent;
     }
 
-    public function setParent(Category $parent): static
+    public function setParent(?Category $parent): static
     {
         $this->parent = $parent;
 
