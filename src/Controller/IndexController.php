@@ -54,6 +54,11 @@ final class IndexController extends AbstractController
     {
         $link = $entityManager->getRepository(Link::class)->getOneRandom();
 
+        if(is_null($link))
+        {
+            return $this->redirectToRoute('app_add');
+        }
+
         return new RedirectResponse($link->getURL());
     }
 
