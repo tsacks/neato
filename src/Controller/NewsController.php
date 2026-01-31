@@ -45,7 +45,7 @@ final class NewsController extends AbstractController
     #[Route('/news', name: 'app_news')]
     public function default(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $location = json_decode($request->cookies->get('weatherLocation'));
+        $location = json_decode($request->cookies->get('weatherLocation') ?? "");
 
         if($location)
         {
@@ -101,7 +101,7 @@ final class NewsController extends AbstractController
         {
             $simplepie->set_feed_url($feed->getURL());
             $success = $simplepie->init();
-            $feed->items = $simplepie->get_items();
+            $feed->setItems($simplepie->get_items());
         }
 
         //dd($feeds);

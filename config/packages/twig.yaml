@@ -1,6 +1,9 @@
 twig:
     file_name_pattern: '*.twig'
     form_themes: ['form_table_layout.html.twig', 'form/netscape.html.twig']
+    globals:
+        goth_email: '%app.goth_email%'
+        goth_link: '%app.goth_link%'
 
 when@test:
     twig:

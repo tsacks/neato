@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 trait Timestamps
 {
-    #[ORM\Column(name:'created_at',type:'datetime_immutable')]
+    #[ORM\Column(name:'created_at',type:'datetime_immutable',options:['default' => 'CURRENT_TIMESTAMP'])]
     private $createdAt;
 
     #[ORM\Column(name:'updated_at',type:'datetime',nullable:true)]

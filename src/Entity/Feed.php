@@ -22,6 +22,8 @@ class Feed
     #[ORM\Column(length: 255)]
     private ?string $URL = null;
 
+    private ?array $items = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +61,18 @@ class Feed
     public function setURL(string $URL): static
     {
         $this->URL = $URL;
+
+        return $this;
+    }
+
+    public function getItems(): ?array
+    {
+        return $this->items;
+    }
+
+    public function setItems(array $items): static
+    {
+        $this->items = $items;
 
         return $this;
     }
