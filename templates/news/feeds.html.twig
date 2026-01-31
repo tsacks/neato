@@ -62,12 +62,17 @@
                 {% set item = feed.items[i] %}
                 <tr>
                     <td>
-                        <img src="{{ path('app_proxy_image') ~ '?url=' ~ item.get_item_tags('http://search.yahoo.com/mrss/', 'thumbnail').1.attribs[''].url|url_encode }}">
+                        {% if item.get_enclosure().get_thumbnail() is defined %}
+                        {% set img_url = path('app_proxy_image') ~ '?url=' ~ item.get_enclosure().get_thumbnail()|url_encode %}
+                        {% else %}
+                        {% set img_url = asset( 'images/news-thumb.png' ) %}
+                        {% endif %}
+                        <img width="144" height="108" src="{{ img_url }}">
                     </td>
                     <td class="story">
                         <b><a href="{{ item.get_permalink() }}">{{ item.get_title() }}</a></b>
                         <div class="datetime">{{ item.get_date() }}</div>
-                        <p>{{ item.get_description() }}</p>
+                        <p>{{ item.get_description()|striptags }}</p>
                     </td>
                 </tr>
             {% endif %}
