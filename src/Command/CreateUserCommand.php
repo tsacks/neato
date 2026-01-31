@@ -37,9 +37,9 @@ class CreateUserCommand extends Command
     protected function configure(): void
     {
         $this
-            ->addArgument('title', InputArgument::REQUIRED, 'The username of the user')
-            ->addArgument('slug', InputArgument::REQUIRED, 'The email of the user')
-            ->addArgument('url', InputArgument::REQUIRED, 'Password in plain text (will be encrypted automatically)')
+            ->addArgument('name', InputArgument::REQUIRED, 'The username of the user')
+            ->addArgument('email', InputArgument::REQUIRED, 'The email of the user')
+            ->addArgument('password', InputArgument::REQUIRED, 'Password in plain text (will be encrypted automatically)')
             ->addOption('category', 'c', InputOption::VALUE_NONE, 'Suppress creating a category for the user under "entertainment/cool-links/guides-picks"')
         ;
     }
