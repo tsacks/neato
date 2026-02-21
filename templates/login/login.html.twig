@@ -4,7 +4,7 @@
 
 {% block body %}
     <style>
-        #form {
+        #form, .center {
             margin-left: auto;
             margin-right: auto;
         }
@@ -16,12 +16,12 @@
             {% endif %}
 
             {% if app.user %}
-                <div class="mb-3">
+                <div class="center">
                     You are logged in as {{ app.user.userIdentifier }}, <a href="{{ logout_path() }}">Logout</a>
                 </div>
             {% endif %}
 
-            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+            <h2>Please sign in</h2>
 
             <table id="form">
                 <tbody>
@@ -47,6 +47,12 @@
                 </tbody>
             </table>
         </form>
+
+        <div class="center">
+            <p>
+                <a href="{{ path('app_forgot_password_request') }}">Forgot password?</a>
+            </p>
+        </div>
 
         <hr>
     </div>
